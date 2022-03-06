@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Ethereum",
+    "price": "31,818.81€",
+    "change": "-3%",
+    "volume": "23.92€",
+    "marketCap": "689.33€",
+    "updated": false
+  },
+  {
+    "name": "Litecoin",
+    "price": "10,600.53€",
+    "change": "-12%",
+    "volume": "21.61€",
+    "marketCap": "494.15€",
+    "updated": false
+  },
+  {
+    "name": "Cardano",
+    "price": "2,802.71€",
+    "change": "+2%",
+    "volume": "24.99€",
+    "marketCap": "362.78€",
+    "updated": false
+  },
+  {
+    "name": "Polkadot",
+    "price": "5,301.51€",
+    "change": "+4%",
+    "volume": "13.01€",
+    "marketCap": "68.35€",
+    "updated": false
+  },
+  {
+    "name": "Bitcoin",
+    "price": "12,166.82€",
+    "change": "-5%",
+    "volume": "7.96€",
+    "marketCap": "38.73€",
+    "updated": false
+  },
+  {
+    "name": "Stellar",
+    "price": "6,603.4€",
+    "change": "0%",
+    "volume": "5.53€",
+    "marketCap": "50.27€",
+    "updated": true
+  },
+  {
+    "name": "Dogecoin",
+    "price": "5,822€",
+    "change": "+10%",
+    "volume": "22.32€",
+    "marketCap": "28€",
+    "updated": false
+  },
+  {
+    "name": "Binance",
+    "price": "4,444.41€",
+    "change": "+13%",
+    "volume": "20.82€",
+    "marketCap": "11.24€",
+    "updated": false
+  }
+]

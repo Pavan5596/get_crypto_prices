@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			h2 {
+				text-align: center;
+			}
+			table {
+				font-family: arial, sans-serif;
+				border-collapse: collapse;
+				width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			tr > th {
+				background-color: #888888;
+			}
+			td, th {
+				border: 1px solid #dddddd;
+				text-align: center;
+				vertical-align: middle;
+				padding: 8px;
+			}
+			tr:nth-child(even) {
+				background-color: #dddddd;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				let socket = new WebSocket("ws://localhost:8080");
+
+				socket.onopen = function(e) {
+					console.log("[open] Connection established");
+					console.log("Sending to server");
+					socket.send("Connection established");
+				};
+
+				socket.onmessage = function(event) {
+					console.log(`[message] Data received from server: ${event.data}`);
+					const obj = JSON.parse(event.data);
+					console.log(Object.keys(obj).length);
+					if(Object.keys(obj).length==8){
+						obj.forEach(element => {
+							if(element!= null){
+								let $row = $(''+
+											'<td>'+element.name+'</td>'+
+											'<td>'+element.price+'</td>'+
+											'<td>'+element.change+'</td>'+
+											'<td>'+element.volume+'</td>'+
+											'<td>'+element.marketCap+'</td>');
+								$('table > tbody > tr[id="'+element.name+'"]').append($row);
+							}
+						});
+					}
+					else {
+						element = obj;
+						if(element!= null){
+							let $row = $(''+
+										'<td>'+element.name+'</td>'+
+										'<td>'+element.price+'</td>'+
+										'<td>'+element.change+'</td>'+
+										'<td>'+element.volume+'</td>'+
+										'<td>'+element.marketCap+'</td>');
+							$('table > tbody > tr[id="'+element.name+'"]').html($row);
+							let $el = $('table > tbody > tr[id="'+element.name+'"]'),
+								x = 1000,
+								originalColor = $el.css("background");
+							$el.css("background", "#C0C0C0");
+							setTimeout(function(){
+								$el.css("background", originalColor);
+							}, x);
+						}
+					}
+				};
+
+				socket.onclose = function(event) {
+					if (event.wasClean) {
+						console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+					} else {
+						// e.g. server process killed or network down
+						// event.code is usually 1006 in this case
+						console.log('[close] Connection died');
+					}
+				};
+
+				socket.onerror = function(error) {
+					console.log(`[error] ${error.message}`);
+				};			
+			});
+		</script>
+	</head>
+	<body>
+	<h2>Coinbase</h2>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Change</th>
+				<th>Volume</th>
+				<th>Market Cap</th>
+			</tr>
+			<tr id="Ethereum"></tr>
+			<tr id="Litecoin"></tr>
+			<tr id="Cardano"></tr>
+			<tr id="Polkadot"></tr>
+			<tr id="Bitcoin"></tr>
+			<tr id="Stellar"></tr>
+			<tr id="Dogecoin"></tr>
+			<tr id="Binance"></tr>
+		</table>
+	</body>
+</html>
